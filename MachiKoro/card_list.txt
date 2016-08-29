@@ -1,0 +1,16 @@
+# qty,color,name,cost,value,low_roll,high_roll,icon,
+
+6,Blue,Wheat Field,1,1,1,1,grain
+6,Blue,Ranch,1,1,2,2,cow
+6,Blue,Forest,3,1,5,5,gear
+6,Blue,Mine,6,3,9,9,gear
+6,Blue,Apple Orchard,2,1,10,10,grain
+
+6,Green,Bakery,1,1,2,3,bread
+6,Green,Convience Store,2,3,4,4,bread
+6,Green,Cheese Factory,5,0,7,7,factory
+6,Green,Furniture Factory,3,0,8,8,factory
+6,Green,Fruit And Vegetable Market,2,0,11,12,factory
+
+6,Red,Cafe,2,1,3,3,restaurant
+6,Red,Family Restaurant,3,2,9,10,restaurant

@@ -13,6 +13,9 @@ using namespace std;
 class Deck {
 public:
 	Deck();
+	
+	void shuffle();
+
 	vector<Card*> deck;
 
 private:

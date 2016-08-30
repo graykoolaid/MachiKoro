@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+#include <ctime>
 #include "Deck.h"
 
 
@@ -39,4 +41,17 @@ Deck::Deck()
 	for (int i = 0; i < 4; i++) { c = new TVStation(); this->deck.push_back(c); }
 	for (int i = 0; i < 4; i++) { c = new Stadium(); this->deck.push_back(c); }
 
+
+	this->shuffle();
+}
+
+void Deck::shuffle()
+{
+	srand(unsigned(std::time(0)));
+	random_shuffle(this->deck.begin(), this->deck.end());
+	random_shuffle(this->deck.begin(), this->deck.end());
+	random_shuffle(this->deck.begin(), this->deck.end());
+	random_shuffle(this->deck.begin(), this->deck.end());
+	random_shuffle(this->deck.begin(), this->deck.end());
+	random_shuffle(this->deck.begin(), this->deck.end());
 }

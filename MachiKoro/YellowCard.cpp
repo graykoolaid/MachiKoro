@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "YellowCard.h"
 
-void YellowCard::action(Player *p1, Player *p2, Card *c1, Card *c2, int val)
+void YellowCard::action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val)
 {
 	// Nothing to really do here yet
 }

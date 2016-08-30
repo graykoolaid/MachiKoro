@@ -2,7 +2,7 @@
 #include "RedCard.h"
 
 // Player 1 will take coins from player 2
-void RedCard::action(Player *p1, Player *p2, Card *c1, Card *c2, int val)
+void RedCard::action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val)
 {
 	p1->deposit(p2->withdraw(this->get_value()));
 }

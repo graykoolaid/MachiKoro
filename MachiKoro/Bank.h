@@ -1,17 +1,16 @@
 #pragma once
 
 #include <string>
+//#include "RedCard.h"
 
 using namespace std;
 
-class Player{
+class Bank{
 public:
-	Player(string name);
+	Bank();
 	void deposit(int val);
 	int withdraw(int val);
 	int get_coins();
-	string get_name();
 private:
 	int coins;
-	string name;
 };

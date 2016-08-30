@@ -16,12 +16,18 @@
     <Filter Include="Source Files\Cards">
       <UniqueIdentifier>{99086808-3fc7-49c0-b53e-3df4550c085d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{03bb5890-1887-437e-85f5-c778f2853bda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Deck">
+      <UniqueIdentifier>{b1f3dae6-07fd-4141-9d11-fab096359b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bank">
+      <UniqueIdentifier>{c4fb3c38-cc1a-4e73-b77f-d82e43d2bca8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
-    <Text Include="card_list.txt">
-      <Filter>Source Files\Cards</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -51,8 +57,14 @@
     <ClInclude Include="ColorAndIcon.h">
       <Filter>Source Files\Cards</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
     <ClInclude Include="Deck.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="Bank.h">
+      <Filter>Source Files\Bank</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,9 +80,6 @@
     <ClCompile Include="Card.cpp">
       <Filter>Source Files\Cards</Filter>
     </ClCompile>
-    <ClCompile Include="Deck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GreenCard.cpp">
       <Filter>Source Files\Cards</Filter>
     </ClCompile>
@@ -82,6 +91,15 @@
     </ClCompile>
     <ClCompile Include="PurpleCard.cpp">
       <Filter>Source Files\Cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>Source Files\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="Bank.cpp">
+      <Filter>Source Files\Bank</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -142,7 +142,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="card_list.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +149,9 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="ColorAndIcon.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GreenCard.h" />
+    <ClInclude Include="Bank.h" />
     <ClInclude Include="PurpleCard.h" />
     <ClInclude Include="RedCard.h" />
     <ClInclude Include="stdafx.h" />
@@ -161,8 +162,10 @@
     <ClCompile Include="BlueCard.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GreenCard.cpp" />
     <ClCompile Include="MachiKoro.cpp" />
+    <ClCompile Include="Bank.cpp" />
     <ClCompile Include="PurpleCard.cpp" />
     <ClCompile Include="RedCard.cpp" />
     <ClCompile Include="stdafx.cpp">

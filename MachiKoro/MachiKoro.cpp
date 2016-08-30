@@ -19,16 +19,27 @@ void view_slots(Game *g)
 
 int main()
 {
-	Deck *d;
-
 	Game *g = new Game();
-	g->deal();
-
 	view_slots(g);
 
-	g->deal();
+	int dice;
+	while (!g->is_game_over)
+	{
+		dice = g->roll_dice();
+		cout << dice << endl;
 
-	view_slots(g);
+		// This doesnt do anything yet..
+		void yellow_card_check();
+
+		//void red_card_check();
+		//void blue_card_check();
+		//void green_card_check();
+		//void purple_card_check();
+		//void buy_propery();
+		//void end_of_turn();
+		g->is_game_over = true;
+	}
+
 
 	char t;
 	cin >> t;

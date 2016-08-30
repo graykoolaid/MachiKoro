@@ -1,5 +1,4 @@
 #pragma once
-
 enum class Color {
 	blue = 0,
 	green,

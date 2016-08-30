@@ -6,7 +6,7 @@ using namespace machi;
 
 class YellowCard : public Card {
 public:
-	virtual void action(Player *p1, Player *p2, Card *c1, Card *c2, int val);
+	virtual void action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val);
 private:
 };
 

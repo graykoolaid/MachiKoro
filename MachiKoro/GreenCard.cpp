@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GreenCard.h"
 
-void GreenCard::action(Player *p1, Player *p2, Card *c1, Card *c2, int val)
+void GreenCard::action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val)
 {
 	if (this->multiplier == Icon::none)
 	{

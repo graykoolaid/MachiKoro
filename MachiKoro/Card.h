@@ -2,13 +2,13 @@
 
 #include <string>
 #include "ColorAndIcon.h"
-#include "Player.h"
+#include "Bank.h"
 
 using namespace std;
 namespace machi {
 	class Card {
 	public:
-		virtual void action(Player *p1, Player *p2, Card *c1, Card *c2, int val) = 0;
+		virtual void action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val) = 0;
 		void set_cost(int cost);
 		void set_value(int value);
 		void set_color(Color color);

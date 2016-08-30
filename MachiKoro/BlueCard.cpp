@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BlueCard.h"
 
-void BlueCard::action(Player *p1, Player *p2, Card *c1, Card *c2, int val)
+void BlueCard::action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val)
 {
 	p1->deposit(this->get_value());
 }

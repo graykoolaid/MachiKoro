@@ -1,23 +1,22 @@
 #include "stdafx.h"
-#include "Player.h"
+#include "Bank.h"
 
-Player::Player(string name)
+Bank::Bank()
 {
-	this->name = name;
 	this->coins = 3;
 }
 
-int Player::get_coins()
+int Bank::get_coins()
 {
 	return this->coins;
 }
 
-void Player::deposit(int val)
+void Bank::deposit(int val)
 {
 	this->coins += val;
 }
 
-int Player::withdraw(int val)
+int Bank::withdraw(int val)
 {
 	if (val > this->coins)
 	{
@@ -28,9 +27,4 @@ int Player::withdraw(int val)
 
 	this->coins -= val;
 	return val;
-}
-
-string Player::get_name()
-{
-	return this->name;
 }

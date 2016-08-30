@@ -12,6 +12,8 @@ int main()
 	Deck *d = new Deck();
 //	Players *p = new Player();
 
+	cout << d->deck.size() << endl;
+
 	char t;
 	cin >> t;
     return 0;

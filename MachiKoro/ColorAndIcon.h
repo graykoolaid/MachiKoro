@@ -16,5 +16,6 @@ enum class Icon {
 	factory,
 	retaurant,
 	establishment,
-	boat
+	boat,
+	none
 };

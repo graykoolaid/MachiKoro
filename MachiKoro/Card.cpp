@@ -4,11 +4,6 @@
 
 using namespace machi;
 
-Card::Card()
-{
-
-}
-
 void Card::set_card(string name, int cost, int value, int low_roll, int high_roll, Icon icon)
 {
 	this->set_name(name);

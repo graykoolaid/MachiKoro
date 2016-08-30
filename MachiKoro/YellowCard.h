@@ -6,34 +6,30 @@ using namespace machi;
 
 class YellowCard : public Card {
 public:
-	virtual void action() = 0;
+	virtual void action(Player *p1, Player *p2, Card *c1, Card *c2, int val);
 private:
 };
 
-class AmusementPark : public Card {
+class AmusementPark : public YellowCard {
 public:
 	AmusementPark();
-	virtual void action() = 0;
 private:
 };
 
-class RadioTower : public Card {
+class RadioTower : public YellowCard {
 public:
 	RadioTower();
-	virtual void action() = 0;
 private:
 };
 
-class ShoppingMall : public Card {
+class ShoppingMall : public YellowCard {
 public:
 	ShoppingMall();
-	virtual void action() = 0;
 private:
 };
 
-class TrainStation : public Card {
+class TrainStation : public YellowCard {
 public:
 	TrainStation();
-	virtual void action() = 0;
 private:
 };

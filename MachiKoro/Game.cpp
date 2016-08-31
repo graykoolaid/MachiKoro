@@ -77,10 +77,10 @@ vector<vector<Card *>> Game::get_slot()
 
 void Game::roll_dice()
 {
-	this->dice = rand() % 6;
+	this->dice = rand() % 6 + 1;
 
 	cout << endl;
-	cout << "Player - " << this->turn << " rolled a : " << this->dice << endl;
+	cout << "Player: " << this->turn << " | rolled a " << this->dice << " | Coins: " << this->players[turn]->bank->get_coins() << endl;
 
 	this->yellow_card_check();
 }
@@ -104,8 +104,6 @@ void Game::red_card_check()
 
 	while (tracker != this->turn)
 	{
-		cout << tracker << ":" << this->turn << ",";
-
 		for (int i = 0; i < this->players[tracker]->red_cards.size(); i++)
 		{
 			if (this->dice <= this->players[tracker]->red_cards[i]->get_high_roll() &&
@@ -125,7 +123,6 @@ void Game::red_card_check()
 		if (tracker < 0) tracker = this->players.size() - 1;
 
 	}
-	cout << endl;
 	this->blue_card_check();
 }
 void Game::blue_card_check()
@@ -206,9 +203,9 @@ void Game::end_of_turn()
 		}
 	}
 	if (this->is_game_over) { cout << this->turn << " wins" << endl; return; }
-	cout << "End of " << this->turn << "'s turn.";
+	cout << "End of " << this->turn << "'s turn. Coins: " << this->players[turn]->bank->get_coins();
 	this->turn++;
 	if (this->turn == players.size()) this->turn = 0;
-	cout << " " << this->turn << "'s turn next";
+	cout << " | " << this->turn << "'s turn next";
 	return;
 }

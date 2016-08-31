@@ -104,7 +104,6 @@ void Game::red_card_check()
 
 	while (tracker != this->turn)
 	{
-		//if (tracker < 0) tracker = this->players.size() - 1;
 		cout << tracker << ":" << this->turn << ",";
 
 		for (int i = 0; i < this->players[tracker]->red_cards.size(); i++)
@@ -126,6 +125,7 @@ void Game::red_card_check()
 		if (tracker < 0) tracker = this->players.size() - 1;
 
 	}
+	cout << endl;
 	this->blue_card_check();
 }
 void Game::blue_card_check()
@@ -138,7 +138,7 @@ void Game::blue_card_check()
 			if (this->dice <= this->players[i]->blue_cards[j]->get_high_roll() &&
 				this->dice >= this->players[i]->blue_cards[j]->get_low_roll())
 			{
-				this->players[i]->blue_cards[i]->action(
+				this->players[i]->blue_cards[j]->action(
 					this->players[i]->bank,
 					NULL,
 					NULL,

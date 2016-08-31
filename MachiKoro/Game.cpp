@@ -128,6 +128,7 @@ void Game::red_card_check()
 				this->dice >= this->players[tracker]->red_cards[i]->get_low_roll())
 			{
 				Card *c = NULL;
+				// Should be Shopping Mall
 				if (this->players[tracker]->yellow_cards[2]->active) c = this->players[tracker]->red_cards[i];
 				this->players[tracker]->red_cards[i]->action(
 					this->players[tracker]->bank,
@@ -176,6 +177,7 @@ void Game::green_card_check()
 			this->dice >= this->players[this->turn]->green_cards[i]->get_low_roll())
 		{
 			Card *c = NULL;
+			// Should be Shopping Mall
 			if (this->players[this->turn]->yellow_cards[2]->active) c = this->players[this->turn]->red_cards[i];
 			int val = 0;
 			Icon icon = this->players[this->turn]->green_cards[i]->get_icon();
@@ -229,7 +231,7 @@ void Game::end_of_turn()
 	this->turn++;
 
 	// Should be Amusement Park card
-	if (this->players[this->turn]->yellow_cards[2]->active)
+	if (this->players[this->turn - 1]->yellow_cards[2]->active)
 	{
 		turn--;
 	}

@@ -20,6 +20,19 @@ void Game::create_player(string name)
 	player *p = new player();
 	p->bank = new Bank();
 	p->name = name;
+
+	YellowCard *c;
+	c = new TrainStation(); p->yellow_cards.push_back(c);
+	c = new ShoppingMall(); p->yellow_cards.push_back(c);
+	c = new AmusementPark(); p->yellow_cards.push_back(c);
+	c = new RadioTower(); p->yellow_cards.push_back(c);
+
+	BlueCard *b;
+	b = new WheatField(); p->blue_cards.push_back(b);
+
+	GreenCard *g;
+	g = new Bakery(); p->green_cards.push_back(g);
+
 	players.push_back(p);
 }
 
@@ -181,9 +194,18 @@ void Game::buy_propery()
 	this->end_of_turn();
 }
 
-// TODO: Add Game winning state
 void Game::end_of_turn()
 {
+	this->is_game_over = true;
+	for (int i = 0; i < this->players[turn]->yellow_cards.size(); i++)
+	{
+		if (!this->players[turn]->yellow_cards[i]->active)
+		{
+			this->is_game_over = false;
+			break;
+		}
+	}
+	if (this->is_game_over) { cout << this->turn << " wins" << endl; return; }
 	cout << "End of " << this->turn << "'s turn.";
 	this->turn++;
 	if (this->turn == players.size()) this->turn = 0;

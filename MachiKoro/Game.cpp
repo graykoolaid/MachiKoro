@@ -62,9 +62,14 @@ vector<vector<Card *>> Game::get_slot()
 	return this->slot;
 }
 
-int Game::roll_dice()
+void Game::roll_dice()
 {
-	return rand() % 6;
+	this->dice = rand() % 6;
+
+	cout << endl;
+	cout << "Player - " << this->turn << " rolled a : " << this->dice << endl;
+
+	this->yellow_card_check();
 }
 
 void Game::iterate(Color c)
@@ -74,29 +79,108 @@ void Game::iterate(Color c)
 
 void Game::yellow_card_check()
 {
-
+	cout << "Checking Yellow Cards..." << endl;
+	cout << "Nothing to do" << endl;
+	this->red_card_check();
 }
 void Game::red_card_check()
 {
+	cout << "Checking Red Cards..." << endl;
+	int tracker = this->turn - 1;
+	if (tracker < 0) tracker = this->players.size() - 1;
 
+	while (tracker != this->turn)
+	{
+		//if (tracker < 0) tracker = this->players.size() - 1;
+		cout << tracker << ":" << this->turn << ",";
+
+		for (int i = 0; i < this->players[tracker]->red_cards.size(); i++)
+		{
+			if (this->dice <= this->players[tracker]->red_cards[i]->get_high_roll() &&
+				this->dice >= this->players[tracker]->red_cards[i]->get_low_roll())
+			{
+				this->players[tracker]->red_cards[i]->action(
+					this->players[tracker]->bank,
+					this->players[this->turn]->bank,
+					NULL,
+					NULL,
+					0
+					);
+			}
+			//if (this->players[i]->bank->get_coins() == 0) break;
+		}
+		tracker--;
+		if (tracker < 0) tracker = this->players.size() - 1;
+
+	}
+	this->blue_card_check();
 }
 void Game::blue_card_check()
 {
-
+	cout << "Checking Blue Cards..." << endl;
+	for (int i = 0; i < this->players.size(); i++)
+	{
+		for (int j = 0; j < this->players[i]->blue_cards.size(); j++)
+		{
+			if (this->dice <= this->players[i]->blue_cards[j]->get_high_roll() &&
+				this->dice >= this->players[i]->blue_cards[j]->get_low_roll())
+			{
+				this->players[i]->blue_cards[i]->action(
+					this->players[i]->bank,
+					NULL,
+					NULL,
+					NULL,
+					0
+					);
+			}
+		}
+	}
+	this->green_card_check();
 }
 void Game::green_card_check()
 {
-
+	cout << "Checking Green Cards..." << endl;
+	for (int i = 0; i < this->players[this->turn]->green_cards.size(); i++)
+	{
+		if (this->dice <= this->players[this->turn]->green_cards[i]->get_high_roll() &&
+			this->dice >= this->players[this->turn]->green_cards[i]->get_low_roll())
+		{
+			int val = 0;
+			Icon icon = this->players[this->turn]->green_cards[i]->get_icon();
+			if (icon != Icon::none)
+			{
+				for (int j = 0; j < this->players[this->turn]->blue_cards.size(); j++)
+				{
+					if (icon == this->players[this->turn]->blue_cards[j]->get_icon()) val++;
+				}
+			}
+			this->players[this->turn]->green_cards[i]->action(
+				this->players[this->turn]->bank,
+				NULL,
+				NULL,
+				NULL,
+				val
+				);
+		}
+	}
+	this->purple_card_check();
 }
 void Game::purple_card_check()
 {
-
+	cout << "Checking Purple Cards..." << endl;
+	cout << "Nothing to do" << endl;
+	this->buy_propery();
 }
 void Game::buy_propery()
 {
-
+	cout << "Which property would you like to buy?" << endl;
+	this->end_of_turn();
 }
 void Game::end_of_turn()
 {
-
+	cout << "End of " << this->turn << "'s turn.";
+	this->turn++;
+	if (this->turn == players.size()) this->turn = 0;
+	cout << " " << this->turn << "'s turn next";
+	return;
 }

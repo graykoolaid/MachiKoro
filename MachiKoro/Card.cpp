@@ -72,3 +72,11 @@ Icon Card::get_icon()
 {
 	return this->icon;
 }
+int Card::get_low_roll()
+{
+	return this->low_roll;
+}
+int Card::get_high_roll()
+{
+	return this->high_roll;
+}

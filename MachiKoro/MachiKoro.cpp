@@ -25,11 +25,10 @@ int main()
 	int dice;
 	while (!g->is_game_over)
 	{
-		dice = g->roll_dice();
-		cout << dice << endl;
+		g->roll_dice();
 
 		// This doesnt do anything yet..
-		void yellow_card_check();
+		//void yellow_card_check();
 
 		//void red_card_check();
 		//void blue_card_check();
@@ -37,7 +36,9 @@ int main()
 		//void purple_card_check();
 		//void buy_propery();
 		//void end_of_turn();
-		g->is_game_over = true;
+		//g->is_game_over = true;
+		char t;
+		cin >> t;
 	}
 
 

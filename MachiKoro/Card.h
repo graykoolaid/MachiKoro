@@ -26,6 +26,8 @@ namespace machi {
 		bool get_renovation();
 		string get_name();
 
+		int get_high_roll();
+		int get_low_roll();
 	private:
 		int low_roll;
 		int high_roll;

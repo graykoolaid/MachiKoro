@@ -75,27 +75,45 @@ vector<vector<Card *>> Game::get_slot()
 	return this->slot;
 }
 
+void Game::rolling_dice(int dice_count)
+{
+	this->dice1 = rand() % 6 + 1;
+	this->dice2 = 0;
+
+	if (dice_count == 2)
+	{
+		this->dice2 = rand() % 6 + 1;
+	}
+	this->dice = this->dice1 + this->dice2;
+}
+
 void Game::roll_dice()
 {
-	this->dice = rand() % 6 + 1;
+	int dice_count = 1;
+
+	// Should be Train Station Card
+	if (this->players[this->turn]->yellow_cards[0]->active)
+	{
+		cout << "1 or 2 dice: ";
+		cin >> dice_count;
+	}
+	this->rolling_dice(dice_count);
+
+	// Should be Radio Tower
+	if (this->players[this->turn]->yellow_cards[3]->active)
+	{
+		cout << "Rolled a " << this->dice << ". Reroll(y/n): ";
+		char response;
+		cin >> response;
+		if (response == 'y') this->rolling_dice(dice_count);
+	}
 
 	cout << endl;
 	cout << "Player: " << this->turn << " | rolled a " << this->dice << " | Coins: " << this->players[turn]->bank->get_coins() << endl;
 
-	this->yellow_card_check();
-}
-
-void Game::iterate(Color c)
-{
-
-}
-// TODO: Add Yellow card functionality in Game.cpp
-void Game::yellow_card_check()
-{
-	cout << "Checking Yellow Cards..." << endl;
-	cout << "Nothing to do" << endl;
 	this->red_card_check();
 }
+
 void Game::red_card_check()
 {
 	cout << "Checking Red Cards..." << endl;
@@ -109,10 +127,12 @@ void Game::red_card_check()
 			if (this->dice <= this->players[tracker]->red_cards[i]->get_high_roll() &&
 				this->dice >= this->players[tracker]->red_cards[i]->get_low_roll())
 			{
+				Card *c = NULL;
+				if (this->players[tracker]->yellow_cards[2]->active) c = this->players[tracker]->red_cards[i];
 				this->players[tracker]->red_cards[i]->action(
 					this->players[tracker]->bank,
 					this->players[this->turn]->bank,
-					NULL,
+					c,
 					NULL,
 					0
 					);
@@ -155,6 +175,8 @@ void Game::green_card_check()
 		if (this->dice <= this->players[this->turn]->green_cards[i]->get_high_roll() &&
 			this->dice >= this->players[this->turn]->green_cards[i]->get_low_roll())
 		{
+			Card *c = NULL;
+			if (this->players[this->turn]->yellow_cards[2]->active) c = this->players[this->turn]->red_cards[i];
 			int val = 0;
 			Icon icon = this->players[this->turn]->green_cards[i]->get_icon();
 			if (icon != Icon::none)
@@ -167,7 +189,7 @@ void Game::green_card_check()
 			this->players[this->turn]->green_cards[i]->action(
 				this->players[this->turn]->bank,
 				NULL,
-				NULL,
+				c,
 				NULL,
 				val
 				);
@@ -205,6 +227,12 @@ void Game::end_of_turn()
 	if (this->is_game_over) { cout << this->turn << " wins" << endl; return; }
 	cout << "End of " << this->turn << "'s turn. Coins: " << this->players[turn]->bank->get_coins();
 	this->turn++;
+
+	// Should be Amusement Park card
+	if (this->players[this->turn]->yellow_cards[2]->active)
+	{
+		turn--;
+	}
 	if (this->turn == players.size()) this->turn = 0;
 	cout << " | " << this->turn << "'s turn next";
 	return;

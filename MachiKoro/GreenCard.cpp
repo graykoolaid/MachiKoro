@@ -3,13 +3,15 @@
 
 void GreenCard::action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val)
 {
+	int bonus = 0;
+	if (c1 != NULL) bonus = 1;
 	if (this->multiplier == Icon::none)
 	{
-		p1->deposit(this->get_value());
+		p1->deposit(this->get_value() + bonus);
 	}
 	else
 	{
-		p1->deposit(this->get_value() * val);
+		p1->deposit((this->get_value() * val) + bonus);
 	}
 }
 

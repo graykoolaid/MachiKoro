@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "YellowCard.h"
 
-// TODO: Add yellow card actions
 void YellowCard::action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val)
 {
-	// Nothing to really do here yet
+	// Nothing to really do here yet because yellow cards dont perform actions in the same manner
 }
 
 TrainStation::TrainStation() {

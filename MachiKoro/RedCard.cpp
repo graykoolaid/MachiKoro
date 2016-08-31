@@ -4,7 +4,9 @@
 // Player 1 will take coins from player 2
 void RedCard::action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val)
 {
-	p1->deposit(p2->withdraw(this->get_value()));
+	int bonus = 0;
+	if (c1 != NULL) bonus = 1;
+	p1->deposit(p2->withdraw(this->get_value()+bonus));
 }
 
 Cafe::Cafe() {

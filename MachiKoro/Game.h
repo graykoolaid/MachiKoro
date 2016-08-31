@@ -28,7 +28,6 @@ public:
 	vector<player*> players;
 	void create_player(string name);
 	void roll_dice();
-	void yellow_card_check();
 	void red_card_check();
 	void blue_card_check();
 	void green_card_check();
@@ -36,8 +35,10 @@ public:
 	void buy_propery();
 	void end_of_turn();
 private:
-	void iterate(Color c);
 	int dice;
+	int dice1;
+	int dice2;
+	void rolling_dice(int dice_count);
 	vector<vector<Card *>> slot;
 	int slot_count;
 	Deck *d;

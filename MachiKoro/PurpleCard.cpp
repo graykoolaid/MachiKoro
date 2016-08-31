@@ -5,9 +5,8 @@ BusinessCenter::BusinessCenter() {
 	this->set_card("BusinessCenter", 8, 0, 6, 6, Icon::establishment);
 }
 
-// TODO: Add Business center functionality
 void BusinessCenter::action(Bank *p1, Bank *p2, Card *c1, Card *c2, int val) {
-	// This one is going to be fun
+	// This one is going to be fun. Let the game manager handle it for now.
 }
 
 Stadium::Stadium() {

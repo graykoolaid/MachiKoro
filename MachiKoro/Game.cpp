@@ -200,11 +200,110 @@ void Game::green_card_check()
 	this->purple_card_check();
 }
 
-// TODO: Purple cards need to be referenced on the roll
+// TODO: Refactor this. Especially the card swapping. It u-g-l-y
 void Game::purple_card_check()
 {
-	cout << "Checking Purple Cards..." << endl;
-	cout << "Nothing to do" << endl;
+	for (int i = 0; i < this->players[this->turn]->purple_cards.size(); i++)
+	{
+		if (this->players[this->turn]->purple_cards[i]->get_name().compare("Stadium") == 0)
+		{
+			for (int j = 0; j < this->players.size(); j++)
+			{
+				this->players[this->turn]->bank->deposit(this->players[j]->bank->withdraw(2));
+			}
+		}
+		if (this->players[this->turn]->purple_cards[i]->get_name().compare("TV Station") == 0)
+		{
+			cout << "Take up to 5 coins from: ";
+			for (int j = 0; j < this->players.size(); j++)
+			{
+				cout << j << ": " << this->players[j]->bank->get_coins() << " ";
+			}
+			int player_num;
+			cin >> player_num;
+			this->players[this->turn]->bank->deposit(this->players[player_num]->bank->withdraw(5));
+		}
+		if (this->players[this->turn]->purple_cards[i]->get_name().compare("Business Center") == 0)
+		{
+			cout << "Trade Cards with a player:" << endl;
+			for (int j = 0; j < this->players.size(); j++)
+			{
+				cout << "Player: " << j << endl;
+				cout << "Blue(1): ";
+				for (int k = 0; i < this->players[j]->blue_cards.size(); k++)
+				{
+					cout << " |" << k << ": " << this->players[j]->blue_cards[k]->get_name();
+				}
+				cout << endl;
+				cout << "Green(2): ";
+				for (int k = 0; i < this->players[j]->green_cards.size(); k++)
+				{
+					cout << " |" << k << ": " << this->players[j]->green_cards[k]->get_name();
+				}
+				cout << endl;
+				cout << "Red(3): ";
+				for (int k = 0; i < this->players[j]->red_cards.size(); k++)
+				{
+					cout << " |" << k << ": " << this->players[j]->red_cards[k]->get_name();
+				}
+				cout << endl;
+			}
+			int player_num;
+			int color_num;
+			int card_num;
+			cout << "Select Player to take: ";
+			cin >> player_num;
+			cout << endl;
+
+			cout << "Select Color to take: ";
+			cin >> color_num;
+			cout << endl;
+
+			cout << "Select Card to take: ";
+			cin >> card_num;
+			cout << endl;
+
+			if (color_num == 1)
+			{
+				this->players[this->turn]->blue_cards.push_back(this->players[player_num]->blue_cards[card_num]);
+				this->players[player_num]->blue_cards.erase(this->players[player_num]->blue_cards.begin + card_num);
+			}
+			else if (color_num == 2)
+			{
+				this->players[this->turn]->green_cards.push_back(this->players[player_num]->green_cards[card_num]);
+				this->players[player_num]->green_cards.erase(this->players[player_num]->green_cards.begin + card_num);
+			}
+			else
+			{
+				this->players[this->turn]->red_cards.push_back(this->players[player_num]->red_cards[card_num]);
+				this->players[player_num]->red_cards.erase(this->players[player_num]->red_cards.begin + card_num);
+			}
+
+			cout << "Select Color to give: ";
+			cin >> color_num;
+			cout << endl;
+
+			cout << "Select Card to give: ";
+			cin >> card_num;
+			cout << endl;
+
+			if (color_num == 1)
+			{
+				this->players[player_num]->blue_cards.push_back(this->players[this->turn]->blue_cards[card_num]);
+				this->players[this->turn]->blue_cards.erase(this->players[this->turn]->blue_cards.begin + card_num);
+			}
+			else if (color_num == 2)
+			{
+				this->players[player_num]->green_cards.push_back(this->players[this->turn]->green_cards[card_num]);
+				this->players[this->turn]->green_cards.erase(this->players[this->turn]->green_cards.begin + card_num);
+			}
+			else
+			{
+				this->players[player_num]->red_cards.push_back(this->players[this->turn]->red_cards[card_num]);
+				this->players[this->turn]->red_cards.erase(this->players[this->turn]->red_cards.begin + card_num);
+			}
+		}
+	}
 	this->buy_propery();
 }
 

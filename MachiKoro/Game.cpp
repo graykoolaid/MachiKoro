@@ -76,7 +76,7 @@ void Game::iterate(Color c)
 {
 
 }
-
+// TODO: Add Yellow card functionality in Game.cpp
 void Game::yellow_card_check()
 {
 	cout << "Checking Yellow Cards..." << endl;
@@ -165,17 +165,23 @@ void Game::green_card_check()
 	}
 	this->purple_card_check();
 }
+
+// TODO: Purple cards need to be referenced on the roll
 void Game::purple_card_check()
 {
 	cout << "Checking Purple Cards..." << endl;
 	cout << "Nothing to do" << endl;
 	this->buy_propery();
 }
+
+// TODO: Allow buying of property
 void Game::buy_propery()
 {
 	cout << "Which property would you like to buy?" << endl;
 	this->end_of_turn();
 }
+
+// TODO: Add Game winning state
 void Game::end_of_turn()
 {
 	cout << "End of " << this->turn << "'s turn.";

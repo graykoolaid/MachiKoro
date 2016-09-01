@@ -80,3 +80,19 @@ int Card::get_high_roll()
 {
 	return this->high_roll;
 }
+string Card::get_string_color()
+{
+	switch (this->get_color())
+	{
+	case Color::blue:
+		return "blue";
+	case Color::green:
+		return "green";
+	case Color::red:
+		return "red";
+	case Color::purple:
+		return "purple";
+	case Color::yellow:
+		return "yellow";
+	}
+}

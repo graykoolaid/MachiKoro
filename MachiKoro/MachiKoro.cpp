@@ -24,10 +24,7 @@ int main()
 	while (!g->is_game_over)
 	{
 		g->roll_dice();
-
-		char end;
-		cout << endl  << "Press the any key to end your turn" << endl;
-		cin >> end;
+		system("pause");
 	}
 
 

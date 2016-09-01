@@ -34,6 +34,8 @@ public:
 	void purple_card_check();
 	void buy_propery();
 	void end_of_turn();
+	void view_slot_cards(bool cls);
+	void view_player_cards(int index, bool cls);
 private:
 	int dice;
 	int dice1;

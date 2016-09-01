@@ -90,46 +90,67 @@ void Game::rolling_dice(int dice_count)
 	this->dice = this->dice1 + this->dice2;
 }
 
-void Game::roll_dice()
+void print_card(Card *c)
 {
-	system("cls");
-	this->deal();
+	cout << left <<
+		setw(10) << c->get_string_color() <<
+		setw(25) << c->get_name() <<
+		setw(5) << c->get_cost() <<
+		setw(5) << c->get_value() <<
+		setw(5) << c->get_low_roll() <<
+		setw(5) << c->get_high_roll() << endl;
+}
 
-	cout << left << 
-		setw(5) << "slot" <<
+void print_card_heading()
+{
+	cout << left <<
 		setw(10) << "color" <<
 		setw(25) << "name" <<
-		setw(5) << "qty" <<
 		setw(5) << "cost" <<
 		setw(5) << "val" <<
 		setw(5) << "low" <<
 		setw(5) << "high" << endl;
+}
+
+void Game::view_slot_cards(bool cls)
+{
+	if (cls) system("cls");
+	cout << left <<
+		setw(5) << "slot" <<
+		setw(5) << "qty";
+	print_card_heading();
 	for (int i = 0; i < this->slot.size(); i++)
 	{
-		string color;
-		switch (this->slot[i][0]->get_color())
-		{
-		case Color::blue:
-			color = "blue"; break;
-		case Color::green:
-			color = "green"; break;
-		case Color::red:
-			color = "red"; break;
-		case Color::purple:
-			color = "red"; break;
-		case Color::yellow:
-			color = "red"; break;
-		}
-		cout << left << 
+		cout << left <<
 			setw(5) << i <<
-			setw(10) << color <<
-			setw(25) << this->slot[i][0]->get_name() <<
-			setw(5) << this->slot[i].size() <<
-			setw(5) << this->slot[i][0]->get_cost() <<
-			setw(5) << this->slot[i][0]->get_value() <<
-			setw(5) << this->slot[i][0]->get_low_roll() <<
-			setw(5) << this->slot[i][0]->get_high_roll() << endl;
+			setw(5) << this->slot[i].size();
+		print_card(this->slot[i][0]);
 	}
+	cout << endl;
+}
+
+void Game::view_player_cards(int index, bool cls)
+{
+	if (cls) system("cls");
+	print_card_heading();
+	for (int i = 0; i < this->players[index]->blue_cards.size(); i++) { print_card(this->players[index]->blue_cards[i]); }
+	cout << endl;
+	for (int i = 0; i < this->players[index]->green_cards.size(); i++) { print_card(this->players[index]->green_cards[i]); }
+	cout << endl;
+	for (int i = 0; i < this->players[index]->red_cards.size(); i++) { print_card(this->players[index]->red_cards[i]); }
+	cout << endl;
+	for (int i = 0; i < this->players[index]->purple_cards.size(); i++) { print_card(this->players[index]->purple_cards[i]); }
+	cout << endl;
+	for (int i = 0; i < this->players[index]->yellow_cards.size(); i++) { print_card(this->players[index]->yellow_cards[i]); }
+	cout << endl;
+}
+
+void Game::roll_dice()
+{
+	system("cls");
+	this->deal();
+	this->view_slot_cards(true);
+	this->view_player_cards(this->turn, false);
 	
 	int dice_count = 1;
 
@@ -419,6 +440,6 @@ void Game::end_of_turn()
 		turn--;
 	}
 	if (this->turn == players.size()) this->turn = 0;
-	cout << " | " << this->turn << "'s turn next";
+	cout << " | " << this->turn << "'s turn next" << endl;
 	return;
 }

@@ -28,6 +28,9 @@ namespace machi {
 
 		int get_high_roll();
 		int get_low_roll();
+
+		string get_string_color();
+
 	private:
 		int low_roll;
 		int high_roll;

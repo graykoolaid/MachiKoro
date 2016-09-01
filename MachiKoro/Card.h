@@ -17,7 +17,7 @@ namespace machi {
 		void set_low_roll(int low);
 		void set_high_roll(int high);
 		void set_icon(Icon icon);
-		void set_card(string name, int value, int cost, int low_roll, int high_roll, Icon icon);
+		void set_card(string name, int value, int cost, int low_roll, int high_roll, Icon icon, Color color);
 
 		int get_value();
 		int get_cost();

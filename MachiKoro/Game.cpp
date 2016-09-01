@@ -1,5 +1,8 @@
 #include "stdafx.h"
+#include <iomanip>
 #include "Game.h"
+
+using namespace std;
 
 Game::Game() 
 {
@@ -89,6 +92,44 @@ void Game::rolling_dice(int dice_count)
 
 void Game::roll_dice()
 {
+	system("cls");
+
+	cout << left << 
+		setw(5) << "slot" <<
+		setw(10) << "color" <<
+		setw(25) << "name" <<
+		setw(5) << "qty" <<
+		setw(5) << "cost" <<
+		setw(5) << "val" <<
+		setw(5) << "low" <<
+		setw(5) << "high" << endl;
+	for (int i = 0; i < this->slot.size(); i++)
+	{
+		string color;
+		switch (this->slot[i][0]->get_color())
+		{
+		case Color::blue:
+			color = "blue"; break;
+		case Color::green:
+			color = "green"; break;
+		case Color::red:
+			color = "red"; break;
+		case Color::purple:
+			color = "red"; break;
+		case Color::yellow:
+			color = "red"; break;
+		}
+		cout << left << 
+			setw(5) << i <<
+			setw(10) << color <<
+			setw(25) << this->slot[i][0]->get_name() <<
+			setw(5) << this->slot[i].size() <<
+			setw(5) << this->slot[i][0]->get_cost() <<
+			setw(5) << this->slot[i][0]->get_value() <<
+			setw(5) << this->slot[i][0]->get_low_roll() <<
+			setw(5) << this->slot[i][0]->get_high_roll() << endl;
+	}
+	
 	int dice_count = 1;
 
 	// Should be Train Station Card
@@ -266,17 +307,17 @@ void Game::purple_card_check()
 			if (color_num == 1)
 			{
 				this->players[this->turn]->blue_cards.push_back(this->players[player_num]->blue_cards[card_num]);
-				this->players[player_num]->blue_cards.erase(this->players[player_num]->blue_cards.begin + card_num);
+				this->players[player_num]->blue_cards.erase(this->players[player_num]->blue_cards.begin() + card_num);
 			}
 			else if (color_num == 2)
 			{
 				this->players[this->turn]->green_cards.push_back(this->players[player_num]->green_cards[card_num]);
-				this->players[player_num]->green_cards.erase(this->players[player_num]->green_cards.begin + card_num);
+				this->players[player_num]->green_cards.erase(this->players[player_num]->green_cards.begin() + card_num);
 			}
 			else
 			{
 				this->players[this->turn]->red_cards.push_back(this->players[player_num]->red_cards[card_num]);
-				this->players[player_num]->red_cards.erase(this->players[player_num]->red_cards.begin + card_num);
+				this->players[player_num]->red_cards.erase(this->players[player_num]->red_cards.begin() + card_num);
 			}
 
 			cout << "Select Color to give: ";
@@ -290,17 +331,17 @@ void Game::purple_card_check()
 			if (color_num == 1)
 			{
 				this->players[player_num]->blue_cards.push_back(this->players[this->turn]->blue_cards[card_num]);
-				this->players[this->turn]->blue_cards.erase(this->players[this->turn]->blue_cards.begin + card_num);
+				this->players[this->turn]->blue_cards.erase(this->players[this->turn]->blue_cards.begin() + card_num);
 			}
 			else if (color_num == 2)
 			{
 				this->players[player_num]->green_cards.push_back(this->players[this->turn]->green_cards[card_num]);
-				this->players[this->turn]->green_cards.erase(this->players[this->turn]->green_cards.begin + card_num);
+				this->players[this->turn]->green_cards.erase(this->players[this->turn]->green_cards.begin() + card_num);
 			}
 			else
 			{
 				this->players[player_num]->red_cards.push_back(this->players[this->turn]->red_cards[card_num]);
-				this->players[this->turn]->red_cards.erase(this->players[this->turn]->red_cards.begin + card_num);
+				this->players[this->turn]->red_cards.erase(this->players[this->turn]->red_cards.begin() + card_num);
 			}
 		}
 	}

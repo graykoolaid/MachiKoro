@@ -4,7 +4,7 @@
 
 using namespace machi;
 
-void Card::set_card(string name, int cost, int value, int low_roll, int high_roll, Icon icon)
+void Card::set_card(string name, int cost, int value, int low_roll, int high_roll, Icon icon, Color color)
 {
 	this->set_name(name);
 	this->set_value(value);
@@ -12,7 +12,7 @@ void Card::set_card(string name, int cost, int value, int low_roll, int high_rol
 	this->set_low_roll(low_roll);
 	this->set_high_roll(high_roll);
 	this->set_icon(icon);
-	this->set_color(Color::blue);
+	this->set_color(color);
 }
 
 void Card::set_cost(int cost)

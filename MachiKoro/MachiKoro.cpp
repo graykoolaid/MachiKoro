@@ -20,25 +20,14 @@ void view_slots(Game *g)
 int main()
 {
 	Game *g = new Game();
-	view_slots(g);
 
-	int dice;
 	while (!g->is_game_over)
 	{
 		g->roll_dice();
 
-		// This doesnt do anything yet..
-		//void yellow_card_check();
-
-		//void red_card_check();
-		//void blue_card_check();
-		//void green_card_check();
-		//void purple_card_check();
-		//void buy_propery();
-		//void end_of_turn();
-		//g->is_game_over = true;
-		char t;
-		cin >> t;
+		char end;
+		cout << endl  << "Press the any key to end your turn" << endl;
+		cin >> end;
 	}
 
 

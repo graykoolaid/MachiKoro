@@ -93,6 +93,7 @@ void Game::rolling_dice(int dice_count)
 void Game::roll_dice()
 {
 	system("cls");
+	this->deal();
 
 	cout << left << 
 		setw(5) << "slot" <<
@@ -150,7 +151,7 @@ void Game::roll_dice()
 	}
 
 	cout << endl;
-	cout << "Player: " << this->turn << " | rolled a " << this->dice << " | Coins: " << this->players[turn]->bank->get_coins() << endl;
+	cout << "Player: " << this->turn << " | rolled a " << this->dice << " | Coins: " << this->players[this->turn]->bank->get_coins() << endl;
 
 	this->red_card_check();
 }
@@ -361,17 +362,17 @@ void Game::buy_propery()
 			this->players[this->turn]->blue_cards.push_back((BlueCard*)this->slot[select].back());
 			this->slot[select].pop_back();
 		}
-		if (Color::green == this->slot[select][0]->get_color())
+		else if (Color::green == this->slot[select][0]->get_color())
 		{
 			this->players[this->turn]->green_cards.push_back((GreenCard*)this->slot[select].back());
 			this->slot[select].pop_back();
 		}
-		if (Color::red == this->slot[select][0]->get_color())
+		else if (Color::red == this->slot[select][0]->get_color())
 		{
 			this->players[this->turn]->red_cards.push_back((RedCard*)this->slot[select].back());
 			this->slot[select].pop_back();
 		}
-		if (Color::purple == this->slot[select][0]->get_color())
+		else if (Color::purple == this->slot[select][0]->get_color())
 		{
 			bool flag = false;
 			for (int i = 0; i < this->players[this->turn]->purple_cards.size(); i++)
@@ -385,9 +386,13 @@ void Game::buy_propery()
 				this->slot[select].pop_back();
 			}
 		}
-		if (Color::yellow == this->slot[select][0]->get_color())
+		else if (Color::yellow == this->slot[select][0]->get_color())
 		{
 			//TODO: Implement buying mello yello
+		}
+		if (this->slot[select].size() == 0)
+		{
+			this->slot.erase(this->slot.begin() + select);
 		}
 	}
 	this->end_of_turn();

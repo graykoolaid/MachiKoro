@@ -157,7 +157,6 @@ void Game::roll_dice()
 
 void Game::red_card_check()
 {
-	cout << "Checking Red Cards..." << endl;
 	int tracker = this->turn - 1;
 	if (tracker < 0) tracker = this->players.size() - 1;
 
@@ -189,7 +188,6 @@ void Game::red_card_check()
 }
 void Game::blue_card_check()
 {
-	cout << "Checking Blue Cards..." << endl;
 	for (int i = 0; i < this->players.size(); i++)
 	{
 		for (int j = 0; j < this->players[i]->blue_cards.size(); j++)
@@ -211,7 +209,6 @@ void Game::blue_card_check()
 }
 void Game::green_card_check()
 {
-	cout << "Checking Green Cards..." << endl;
 	for (int i = 0; i < this->players[this->turn]->green_cards.size(); i++)
 	{
 		if (this->dice <= this->players[this->turn]->green_cards[i]->get_high_roll() &&
@@ -351,7 +348,48 @@ void Game::purple_card_check()
 // TODO: Allow buying of property
 void Game::buy_propery()
 {
-	cout << "Which property would you like to buy?" << endl;
+	cout << "Coins after cards: " << this->players[this->turn]->bank->get_coins() << endl;
+	cout << "Which property would you like to buy (n or 0-9)?" << endl;
+	char selection;
+	cin >> selection;
+	cout << endl;
+	if (selection != 'n')
+	{
+		int select = selection - '0';
+		if (Color::blue == this->slot[select][0]->get_color())
+		{
+			this->players[this->turn]->blue_cards.push_back((BlueCard*)this->slot[select].back());
+			this->slot[select].pop_back();
+		}
+		if (Color::green == this->slot[select][0]->get_color())
+		{
+			this->players[this->turn]->green_cards.push_back((GreenCard*)this->slot[select].back());
+			this->slot[select].pop_back();
+		}
+		if (Color::red == this->slot[select][0]->get_color())
+		{
+			this->players[this->turn]->red_cards.push_back((RedCard*)this->slot[select].back());
+			this->slot[select].pop_back();
+		}
+		if (Color::purple == this->slot[select][0]->get_color())
+		{
+			bool flag = false;
+			for (int i = 0; i < this->players[this->turn]->purple_cards.size(); i++)
+			{
+				if (this->slot[select].back()->get_name().compare(this->players[this->turn]->purple_cards[i]->get_name()) == 0)
+					flag = true;
+			}
+			if (!flag)
+			{
+				this->players[this->turn]->green_cards.push_back((GreenCard*)this->slot[select].back());
+				this->slot[select].pop_back();
+			}
+		}
+		if (Color::yellow == this->slot[select][0]->get_color())
+		{
+			//TODO: Implement buying mello yello
+		}
+	}
 	this->end_of_turn();
 }
 

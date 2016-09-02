@@ -41,6 +41,6 @@ FurnitureFactory::FurnitureFactory() {
 }
 
 FruitAndVegetableMarket::FruitAndVegetableMarket() {
-	this->set_card("FruitAndVegetableMarket", 1, 1, 2, 3, Icon::bread, Color::green);
+	this->set_card("FruitAndVegetableMarket", 1, 1, 11, 12, Icon::bread, Color::green);
 	this->set_multiplier_icon(Icon::grain);
 }

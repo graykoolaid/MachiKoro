@@ -163,7 +163,7 @@ int Game::player_input(string message)
 	string cmds = "(no)"
 		"|(view [0-9]+)"
 		"|(view table)"
-		"|(buy [0-9])";
+		"|(buy [0-9]*)";
 	regex view(cmds);
 	bool complete = false;
 	while (true)
@@ -190,6 +190,16 @@ int Game::player_input(string message)
 		}
 		else if (input[0] == "buy")
 		{
+			if (stoi(input[1]) > this->slot.size())
+			{
+				cout << "No card at number: " << stoi(input[1]) << endl;
+				continue;
+			}
+			if (this->players[this->turn]->bank->get_coins() < this->slot[stoi(input[1])][0]->get_cost())
+			{
+				cout << "You cant afford that" << endl;
+				continue;
+			}
 			return stoi(input[1]);
 		}
 	}
@@ -423,48 +433,62 @@ void Game::buy_propery()
 	cout << "Coins after cards: " << this->players[this->turn]->bank->get_coins() << endl;
 	cout << "Which property would you like to buy (n or 0-9)?" << endl;
 	int selection;
-	//cin >> selection;
-	selection = this->player_input("Which property would you like to buy (n or 0-9)?");
-	cout << endl;
-	if (selection > 0)
+	bool complete = false;
+	while (!complete)
 	{
-		int select = selection;
-		if (Color::blue == this->slot[select][0]->get_color())
+		selection = this->player_input("Which property would you like to buy (n or 0-9)?");
+		cout << endl;
+		if (selection > 0)
 		{
-			this->players[this->turn]->blue_cards.push_back((BlueCard*)this->slot[select].back());
-			this->slot[select].pop_back();
-		}
-		else if (Color::green == this->slot[select][0]->get_color())
-		{
-			this->players[this->turn]->green_cards.push_back((GreenCard*)this->slot[select].back());
-			this->slot[select].pop_back();
-		}
-		else if (Color::red == this->slot[select][0]->get_color())
-		{
-			this->players[this->turn]->red_cards.push_back((RedCard*)this->slot[select].back());
-			this->slot[select].pop_back();
-		}
-		else if (Color::purple == this->slot[select][0]->get_color())
-		{
-			bool flag = false;
-			for (int i = 0; i < this->players[this->turn]->purple_cards.size(); i++)
+			int select = selection;
+			if (Color::blue == this->slot[select][0]->get_color())
 			{
-				if (this->slot[select].back()->get_name().compare(this->players[this->turn]->purple_cards[i]->get_name()) == 0)
-					flag = true;
-			}
-			if (!flag)
-			{
-				this->players[this->turn]->purple_cards.push_back((PurpleCard*)this->slot[select].back());
+				this->players[this->turn]->blue_cards.push_back((BlueCard*)this->slot[select].back());
 				this->slot[select].pop_back();
+				complete = true;
+			}
+			else if (Color::green == this->slot[select][0]->get_color())
+			{
+				this->players[this->turn]->green_cards.push_back((GreenCard*)this->slot[select].back());
+				this->slot[select].pop_back();
+				complete = true;
+			}
+			else if (Color::red == this->slot[select][0]->get_color())
+			{
+				this->players[this->turn]->red_cards.push_back((RedCard*)this->slot[select].back());
+				this->slot[select].pop_back();
+				complete = true;
+			}
+			else if (Color::purple == this->slot[select][0]->get_color())
+			{
+				bool purp = true;
+				for (int i = 0; i < this->players[this->turn]->purple_cards.size(); i++)
+				{
+					if (this->slot[select].back()->get_name().compare(this->players[this->turn]->purple_cards[i]->get_name()) == 0)
+					{
+						cout << "You already have this establishment" << endl;
+						purp = false;
+					}
+				}
+				if (purp)
+				{
+					this->players[this->turn]->purple_cards.push_back((PurpleCard*)this->slot[select].back());
+					this->slot[select].pop_back();
+					complete = true;
+				}
+			}
+			else if (Color::yellow == this->slot[select][0]->get_color())
+			{
+				//TODO: Implement buying mello yello
+			}
+			if (this->slot[select].size() == 0)
+			{
+				this->slot.erase(this->slot.begin() + select);
 			}
 		}
-		else if (Color::yellow == this->slot[select][0]->get_color())
+		else
 		{
-			//TODO: Implement buying mello yello
-		}
-		if (this->slot[select].size() == 0)
-		{
-			this->slot.erase(this->slot.begin() + select);
+			break;
 		}
 	}
 	this->end_of_turn();

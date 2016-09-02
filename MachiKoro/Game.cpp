@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include <iomanip>
+#include <sstream>
 #include "Game.h"
+#include <regex>;
 
 using namespace std;
 
@@ -145,6 +147,55 @@ void Game::view_player_cards(int index, bool cls)
 	cout << endl;
 }
 
+vector<string> split(string str)
+{
+	stringstream ss(str);
+	string item;
+	vector<string> tokens;
+	while (getline(ss, item, ' ')) {
+		tokens.push_back(item);
+	}
+	return tokens;
+}
+
+int Game::player_input(string message)
+{
+	string cmds = "(no)"
+		"|(view [0-9]+)"
+		"|(view table)"
+		"|(buy [0-9])";
+	regex view(cmds);
+	bool complete = false;
+	while (true)
+	{
+		string str;
+		getline(cin, str);
+		vector<string> input = split(str);
+		if (!regex_match(str, view))
+		{
+			cout << "Unknown Command" << endl;
+		}
+		else if (input[0] == "no") return -1;
+		else if (input[0] == "view")
+		{
+			if (input[1] == "table") view_slot_cards(true);
+
+			else if (stoi(input[1]) > this->players.size() - 1)
+			{
+				cout << "There is no player " << stoi(input[1]) << endl;
+				continue;
+			}
+			else view_player_cards(stoi(input[1]), true);
+			cout << message << endl;
+		}
+		else if (input[0] == "buy")
+		{
+			return stoi(input[1]);
+		}
+	}
+	return 'a';
+}
+
 void Game::roll_dice()
 {
 	system("cls");
@@ -173,7 +224,6 @@ void Game::roll_dice()
 
 	cout << endl;
 	cout << "Player: " << this->turn << " | rolled a " << this->dice << " | Coins: " << this->players[this->turn]->bank->get_coins() << endl;
-
 	this->red_card_check();
 }
 
@@ -372,12 +422,13 @@ void Game::buy_propery()
 {
 	cout << "Coins after cards: " << this->players[this->turn]->bank->get_coins() << endl;
 	cout << "Which property would you like to buy (n or 0-9)?" << endl;
-	char selection;
-	cin >> selection;
+	int selection;
+	//cin >> selection;
+	selection = this->player_input("Which property would you like to buy (n or 0-9)?");
 	cout << endl;
-	if (selection != 'n')
+	if (selection > 0)
 	{
-		int select = selection - '0';
+		int select = selection;
 		if (Color::blue == this->slot[select][0]->get_color())
 		{
 			this->players[this->turn]->blue_cards.push_back((BlueCard*)this->slot[select].back());
@@ -403,7 +454,7 @@ void Game::buy_propery()
 			}
 			if (!flag)
 			{
-				this->players[this->turn]->green_cards.push_back((GreenCard*)this->slot[select].back());
+				this->players[this->turn]->purple_cards.push_back((PurpleCard*)this->slot[select].back());
 				this->slot[select].pop_back();
 			}
 		}

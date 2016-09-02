@@ -41,6 +41,7 @@ private:
 	int dice1;
 	int dice2;
 	void rolling_dice(int dice_count);
+	int player_input(string message);
 	vector<vector<Card *>> slot;
 	int slot_count;
 	Deck *d;
